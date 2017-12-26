@@ -1,0 +1,17 @@
+{
+    "user": "Southclaws",
+    "repo": "samp-terrain-paint",
+    "entry": "terrain-paint.pwn",
+    "output": "terrain-paint.amx",
+    "dependencies": [
+        "Southclaws/samp-stdlib",
+        "Zeex/amx_assembly",
+        "Misiur/YSI-Includes",
+        "Southclaws/zcmd",
+        "samp-incognito/samp-streamer-plugin",
+        "maddinat0r/sscanf",
+        "ScavengeSurvive/mathutil",
+        "Southclaws/samp-linegen",
+        "Sphinxila/samp-plugin-mapandreas/include"
+    ]
+}

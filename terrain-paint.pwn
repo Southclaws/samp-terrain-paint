@@ -12,12 +12,13 @@
 
 
 #include <a_samp>
+#include <logger>
+#include <YSI\y_timers>
+#include <zcmd>
 #include <streamer>
 #include <sscanf2>
-#include <zcmd>
-#include <YSI\y_timers>
-#include "../scripts/utils/math.pwn"
-#include "../scripts/API/Line/Line.pwn"
+#include <mathutil>
+#include <linegen>
 #include <mapandreas>
 
 
@@ -115,7 +116,7 @@ new
 		sel_AreaID[MAX_PLAYERS];
 
 
-public OnFilterScriptInit()
+public OnScriptInit()
 {
 	MapAndreas_Init(MAP_ANDREAS_MODE_FULL);
 
@@ -222,7 +223,7 @@ timer fol_Update[1000](playerid)
 
 	GetPlayerPos(playerid, x, y, z);
 
-	if(Distance2D(fol_LastPos[playerid][COORD_X], fol_LastPos[playerid][COORD_Y], x, y) > fol_BrushSize[playerid])
+	if(GetDistance2D(fol_LastPos[playerid][COORD_X], fol_LastPos[playerid][COORD_Y], x, y) > fol_BrushSize[playerid])
 	{
 		CreateFoliage(playerid, x, y);
 
@@ -263,8 +264,9 @@ CreateFoliage(playerid, Float:x, Float:y)
 
 			GetDynamicObjectPos(fol_Objects[j], jx, jy, jz);
 
-			if(Distance2D(x, y, jx, jy) < 1.0)
+			if(GetDistance2D(x, y, jx, jy) < 1.0) {
 				continue;
+			}
 		}
 
 		MapAndreas_FindAverageZ(x, y, z);
@@ -379,7 +381,7 @@ Selection_AddNode(playerid, Float:x, Float:y, Float:z)
 	if(sel_Complete[playerid])
 		return 0;
 
-	if(sel_TotalNodes[playerid] > 2 && Distance(x, y, z, sel_NodeData[playerid][0][sel_posX], sel_NodeData[playerid][0][sel_posY], sel_NodeData[playerid][0][sel_posZ]) < 1.0)
+	if(sel_TotalNodes[playerid] > 2 && GetDistance3D(x, y, z, sel_NodeData[playerid][0][sel_posX], sel_NodeData[playerid][0][sel_posY], sel_NodeData[playerid][0][sel_posZ]) < 1.0)
 	{
 		sel_NodeData[playerid][sel_TotalNodes[playerid]][sel_posX] = sel_NodeData[playerid][0][sel_posX];
 		sel_NodeData[playerid][sel_TotalNodes[playerid]][sel_posY] = sel_NodeData[playerid][0][sel_posY];
